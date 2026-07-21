@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+public class TowerOfHanoi {
+
+    static int moveCount = 0;
+
+    // Recursive function to solve Tower of Hanoi
+    public static void solveHanoi(int disks, char source, char auxiliary, char destination) {
+
+        if (disks == 1) {
+            moveDisk(source, destination);
+            return;
+        }
+
+        solveHanoi(disks - 1, source, destination, auxiliary);
+
+        moveDisk(source, destination);
+
+        solveHanoi(disks - 1, auxiliary, source, destination);
+    }
+
+    // Displays each move
+    public static void moveDisk(char from, char to) {
+        moveCount++;
+        System.out.println("Move " + moveCount + ": Disk from " + from + " -> " + to);
+    }
+
+    // Displays total number of moves
+    public static void displayTotalMoves() {
+        System.out.println("\nTotal Moves = " + moveCount);
+    }
+
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Enter Number of Disks: ");
+        int disks = input.nextInt();
+
+        System.out.println("\nSteps:\n");
+
+        solveHanoi(disks, 'A', 'B', 'C');
+
+        displayTotalMoves();
+
+        input.close();
+    }
+}
